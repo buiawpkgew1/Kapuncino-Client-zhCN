@@ -49,15 +49,15 @@ public class NoFall extends Module {
 
     @Override
     public void tick() {
-        if (client.player == null || client.getNetworkHandler() == null) {
+        if (Module.client.player == null || client.getNetworkHandler() == null) {
             return;
         }
-        if (client.player.fallDistance > fallDist.getValue()) {
+        if (Module.client.player.fallDistance > fallDist.getValue()) {
             switch (mode.getValue()) {
                 case Packet -> client.getNetworkHandler().sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true));
                 case BreakFall -> {
-                    client.player.setVelocity(0, 0.1, 0);
-                    client.player.fallDistance = 0;
+                    Module.client.player.setVelocity(0, 0.1, 0);
+                    Module.client.player.fallDistance = 0;
                 }
             }
         }

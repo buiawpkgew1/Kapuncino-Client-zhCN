@@ -85,7 +85,7 @@ public class GodBridge extends Module {
         if (!isReady()) {
             return;
         }
-        Objects.requireNonNull(client.player).setYaw(client.player.getMovementDirection().asRotation());
+        Objects.requireNonNull(Module.client.player).setYaw(client.player.getMovementDirection().asRotation());
         if (client.player.getPitch() > 83) {
             client.player.setPitch(82.5f);
         }

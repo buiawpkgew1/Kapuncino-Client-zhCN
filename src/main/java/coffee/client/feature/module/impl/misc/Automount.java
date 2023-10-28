@@ -30,24 +30,24 @@ public class Automount extends Module {
 
     @Override
     public void onFastTick() {
-        if (client.player.hasVehicle()) return;
+        if (Module.client.player.hasVehicle()) return;
 
-        for (Entity entity : client.world.getEntities()){
-            if (entity.distanceTo(client.player) <= 4){
+        for (Entity entity : Module.client.world.getEntities()){
+            if (entity.distanceTo(Module.client.player) <= 4){
                 if (entity instanceof HorseEntity && horse.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 } else if (entity instanceof DonkeyEntity && donkey.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 } else if (entity instanceof MuleEntity && mule.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 } else if (entity instanceof BoatEntity && boat.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 } else if (entity instanceof MinecartEntity && minecart.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 } else if (entity instanceof PigEntity && pig.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 } else if (entity instanceof LlamaEntity && llama.getValue()){
-                    client.interactionManager.interactEntity(client.player, entity, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactEntity(Module.client.player, entity, Hand.MAIN_HAND);
                 }
             }
         }

@@ -92,7 +92,7 @@ public class Freecam extends Module {
         yaw = pitch = 0f;
         client.gameRenderer.setRenderHand(true);
         client.player.getAbilities().flying = flewBefore;
-        client.player.getAbilities().setFlySpeed(0.05f);
+        client.Module.player.getAbilities().setFlySpeed(0.05f);
         client.player.setVelocity(0, 0, 0);
 
         JinxUtils.RemoveFakePlayer();

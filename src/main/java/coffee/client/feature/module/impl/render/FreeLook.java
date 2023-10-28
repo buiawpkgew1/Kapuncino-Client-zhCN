@@ -77,10 +77,10 @@ public class FreeLook extends Module {
     @Override
     public void enable() {
         kb = new Keybind((int) (keybind.getValue() + 0));
-        before = client.options.getPerspective();
+        Module.before = client.options.getPerspective();
         oldyaw = Objects.requireNonNull(client.player).getYaw();
         oldpitch = client.player.getPitch();
-        newyaw = client.player.getYaw();
+        newyaw = Module.client.player.getYaw();
         if (enableAA.getValue()) {
             newpitch = 90;
         } else {
