@@ -83,7 +83,7 @@ public class SurvivalNuker extends Module {
 
     @Override
     public void tick() {
-        if (client.player == null || client.world == null || client.interactionManager == null || client.getNetworkHandler() == null) {
+        if (client.player == null || Module.client.world == null || client.interactionManager == null || client.getNetworkHandler() == null) {
             return;
         }
         if (delayPassed < delay.getValue()) {

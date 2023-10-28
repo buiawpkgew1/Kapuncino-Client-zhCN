@@ -47,8 +47,8 @@ public class Nuker extends Module {
             for (double y = -halfRange; y <= halfRange + 1; y++) {
                 for (double z = -halfRange; z <= halfRange + 1; z++) {
                     Vec3d posOff = new Vec3d(x - .5, y, z - .5);
-                    Vec3d actual = client.player.getPos().add(posOff);
-                    if (actual.distanceTo(client.player.getEyePos()) > range) {
+                    Vec3d actual = Module.client.player.getPos().add(posOff);
+                    if (actual.distanceTo(Module.client.player.getEyePos()) > range) {
                         continue;
                     }
                     positionsOffset.accept(actual);
@@ -60,7 +60,7 @@ public class Nuker extends Module {
     @Override
     public void tick() {
         switch (modeSetting.getValue()) {
-            case Packet -> iterateOverRange(client.interactionManager.getReachDistance(), vec3d -> {
+            case Packet -> iterateOverRange(Module.client.interactionManager.getReachDistance(), vec3d -> {
                 BlockPos bp = new BlockPos(BlockPos.ofFloored(vec3d));
                 BlockState bs = client.world.getBlockState(bp);
                 if (bs.isAir()) {
@@ -78,7 +78,7 @@ public class Nuker extends Module {
                     new Vec3d(1, 1, 1),
                     500);
             });
-            case Griefing -> iterateOverRange(client.interactionManager.getReachDistance(), vec3d -> {
+            case Griefing -> iterateOverRange(Module.client.interactionManager.getReachDistance(), vec3d -> {
                 BlockPos bp = new BlockPos(BlockPos.ofFloored(vec3d));
                 BlockState bs = client.world.getBlockState(bp);
                 if (bs.isAir()) {
@@ -94,7 +94,7 @@ public class Nuker extends Module {
                         500);
                 }
             });
-            case Interaction -> iterateOverRange(client.interactionManager.getReachDistance(), vec3d -> {
+            case Interaction -> iterateOverRange(Module.client.interactionManager.getReachDistance(), vec3d -> {
                 BlockPos bp = new BlockPos(BlockPos.ofFloored(vec3d));
                 BlockState bs = client.world.getBlockState(bp);
                 if (bs.isAir()) {

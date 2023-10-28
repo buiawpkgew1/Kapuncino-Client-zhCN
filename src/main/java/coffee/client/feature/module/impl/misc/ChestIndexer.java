@@ -120,8 +120,8 @@ public class ChestIndexer extends Module {
     }
 
     boolean isValidChestNeighbor(BlockPos owner, BlockPos bp) {
-        BlockState bs = client.world.getBlockState(bp);
-        BlockState bs1 = client.world.getBlockState(owner);
+        BlockState bs = Module.client.world.getBlockState(bp);
+        BlockState bs1 = Module.client.world.getBlockState(owner);
         return bs1.getBlock() == bs.getBlock();
     }
 
@@ -134,7 +134,7 @@ public class ChestIndexer extends Module {
             if (childrenMap.values().stream().anyMatch(blockPos -> blockPos.contains(lastPos))) {
                 return; // already part of another chest
             }
-            BlockState bs = client.world.getBlockState(lastPos);
+            BlockState bs = Module.client.world.getBlockState(lastPos);
             Block block = bs.getBlock();
             List<Block> blocks = Arrays.asList(ALLOW_LIST);
             if (blocks.contains(block)) {
@@ -155,7 +155,7 @@ public class ChestIndexer extends Module {
                     int x = (int) (-Math.round(Math.sin(v1)));
                     int z = (int) Math.round(Math.cos(v1));
                     BlockPos secondPos = lastPos.add(x, 0, z);
-                    BlockState bs1 = client.world.getBlockState(secondPos);
+                    BlockState bs1 = Module.client.world.getBlockState(secondPos);
                     if (bs1.getBlock() == block && bs1.get(ChestBlock.CHEST_TYPE) == chestType.getOpposite() && bs1.get(ChestBlock.FACING) == direction) {
                         stacks.remove(secondPos); // if the neighbour was already indexed, remove him and use this pos instead
                         childrenMap.computeIfAbsent(lastPos, blockPos -> new ArrayList<>()).add(secondPos);
@@ -176,7 +176,7 @@ public class ChestIndexer extends Module {
             }
             this.stacks.putIfAbsent(this.currentPosClicked, new Int2ObjectArrayMap<>());
             Int2ObjectMap<ItemStack> itemStackInt2ObjectMap = this.stacks.get(this.currentPosClicked);
-            DefaultedList<Slot> slots = client.player.currentScreenHandler.slots;
+            DefaultedList<Slot> slots = Module.client.player.currentScreenHandler.slots;
             int contentLength = slots.size() - 9 * 4; // this one includes the actual inventory so we remove it from the index
             for (int i = 0; i < contentLength; i++) {
                 Slot slot = slots.get(i);
@@ -194,10 +194,10 @@ public class ChestIndexer extends Module {
     public void tick() {
         if (updateTimer.hasExpired(5_000)) {
             for (BlockPos blockPos : new ArrayList<>(stacks.keySet())) {
-                if (!blockPos.isWithinDistance(client.player.getBlockPos(), 64)) {
+                if (!blockPos.isWithinDistance(Module.client.player.getBlockPos(), 64)) {
                     continue; // dont update this one we have no fucking idea whats in it
                 }
-                BlockState bs = client.world.getBlockState(blockPos);
+                BlockState bs = Module.client.world.getBlockState(blockPos);
                 if (!Arrays.asList(ALLOW_LIST).contains(bs.getBlock())) {
                     stacks.remove(blockPos);
                 }

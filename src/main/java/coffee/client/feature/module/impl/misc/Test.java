@@ -26,7 +26,7 @@ public class Test extends Module {
     @Override
     public void enable() {
         new Thread(() -> {
-            pf = new PathFinder(client.player.getBlockPos(), new BlockPos(100, 100, 100));
+            pf = new PathFinder(Module.client.player.getBlockPos(), new BlockPos(100, 100, 100));
             pf.find();
         }).start();
     }

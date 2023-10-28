@@ -12,8 +12,8 @@ public class AutoRespawn extends Module {
 
     @Override
     public void onFastTick() {
-        if (client.currentScreen instanceof DeathScreen){
-            client.player.requestRespawn();
+        if (Module.client.currentScreen instanceof DeathScreen){
+            Module.client.player.requestRespawn();
         }
     }
 

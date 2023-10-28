@@ -24,8 +24,8 @@ public class MCE extends Module {
 
     @Override
     public void onFastTick() {
-        if (client.options.pickItemKey.isPressed()){
-            if(client.currentScreen instanceof GenericContainerScreen) return;
+        if (Module.client.options.pickItemKey.isPressed()){
+            if(Module.client.currentScreen instanceof GenericContainerScreen) return;
             pealcount = InvUtils.getamount(Items.ENDER_PEARL);
 
             if (pealcount == 0) return;
@@ -35,10 +35,10 @@ public class MCE extends Module {
                     int index = InvUtils.findItemInHotbar(Items.ENDER_PEARL);
                     if(index == -1) return;
 
-                    int priorslot = client.player.getInventory().selectedSlot;
-                    client.player.getInventory().selectedSlot = index;
-                    client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
-                    client.player.getInventory().selectedSlot = priorslot;
+                    int priorslot = Module.client.player.getInventory().selectedSlot;
+                    Module.client.player.getInventory().selectedSlot = index;
+                    Module.client.interactionManager.interactItem(Module.client.player, Hand.MAIN_HAND);
+                    Module.client.player.getInventory().selectedSlot = priorslot;
                 }
 
                 case FULLINV -> {
@@ -46,7 +46,7 @@ public class MCE extends Module {
                     if(index == -1) return;
 
                     putinmain(index);
-                    client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
+                    Module.client.interactionManager.interactItem(Module.client.player, Hand.MAIN_HAND);
                     putback(index);
                 }
             }
@@ -55,13 +55,13 @@ public class MCE extends Module {
     }
 
     private void putinmain(int slot){
-        client.interactionManager.clickSlot(0, InvUtils.getslot(slot), 0, SlotActionType.PICKUP, client.player);
-        client.interactionManager.clickSlot(0, 36, 0, SlotActionType.PICKUP, client.player);
+        Module.client.interactionManager.clickSlot(0, InvUtils.getslot(slot), 0, SlotActionType.PICKUP, Module.client.player);
+        Module.client.interactionManager.clickSlot(0, 36, 0, SlotActionType.PICKUP, Module.client.player);
     }
 
     private void putback(int slot){
-        client.interactionManager.clickSlot(0, 36, 0, SlotActionType.PICKUP, client.player);
-        client.interactionManager.clickSlot(0, InvUtils.getslot(slot), 0, SlotActionType.PICKUP, client.player);
+        Module.client.interactionManager.clickSlot(0, 36, 0, SlotActionType.PICKUP, Module.client.player);
+        Module.client.interactionManager.clickSlot(0, InvUtils.getslot(slot), 0, SlotActionType.PICKUP, Module.client.player);
     }
 
     @Override
